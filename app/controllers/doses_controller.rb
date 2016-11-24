@@ -10,14 +10,12 @@ class DosesController < ApplicationController
   end
 
   def create
-    @dose = Dose.new(dose_params)
+    @dose = @cocktail.doses.new(dose_params)
 
-    respond_to do |format|
-      if @dose.save
-        format.html { redirect_to @dose, notice: 'Dose was successfully added' }
-      else
-        format.html { render :new }
-      end
+    if @dose.save
+      redirect_to @cocktail, notice: 'Dose was successfully added'
+    else
+      render "new"
     end
   end
 

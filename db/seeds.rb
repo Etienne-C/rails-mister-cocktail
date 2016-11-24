@@ -11,3 +11,8 @@ Ingredient.create(name: "mint leaves")
 Ingredient.create(name: "apple")
 Ingredient.create(name: "vodka")
 Ingredient.create(name: "salt")
+
+Cocktail.create(name: "Liqueur")
+Cocktail.create(name: "Mojito")
+Cocktail.create(name: "John Sad")
+Cocktail.create(name: "Le petit gregory")
