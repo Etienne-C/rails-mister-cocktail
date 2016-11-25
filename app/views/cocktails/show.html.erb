@@ -1,23 +1,24 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <h1><%= @cocktail.name %></h1>
+      <%= link_to 'Delete', cocktail_path(@cocktail), method: 'delete' %>
+      |
+      <%= link_to 'Back', cocktails_path %>
+      |
+      <%= link_to 'New Dose', new_cocktail_dose_path(@cocktail) %>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="row">
+    <%# @doses.each do |dose| %>
+      <%#= render partial: 'doses/dose', locals: { dose: dose} %>
+    <%# end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @cocktail.name %><br>
- <br></br>
-
-  <strong>Doses:</strong>
-  <ul>
-  <% @cocktail.doses.each do |dose| %>
-    <li>
-    Description : <%= dose.description %><br>
-    <% ingredient = dose.ingredient_id %>
-    Ingredient : <%= Ingredient.find(ingredient).name %>
-    <br></br>
-    </li>
-  <% end %>
-  </ul>
-</p>
-
-<%= link_to 'Edit', edit_cocktail_path(@cocktail) %> |
-<%= link_to 'Add doses', new_cocktail_dose_path(@cocktail) %> |
-<%= link_to 'Back', cocktails_path %>
+    <table class='table'>
+      <%= render @doses %>
+    </table>
+  </div>
+</div>

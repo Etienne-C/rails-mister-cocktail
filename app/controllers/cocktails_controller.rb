@@ -1,15 +1,13 @@
 class CocktailsController < ApplicationController
-  before_action :set_cocktail, only: [:show, :edit, :update, :destroy]
-
   # GET /cocktails
-  # GET /cocktails.json
   def index
     @cocktails = Cocktail.all
   end
 
   # GET /cocktails/1
-  # GET /cocktails/1.json
   def show
+    @cocktail = Cocktail.find(params[:id])
+    @doses = @cocktail.doses
   end
 
   # GET /cocktails/new
@@ -17,53 +15,25 @@ class CocktailsController < ApplicationController
     @cocktail = Cocktail.new
   end
 
-  # GET /cocktails/1/edit
-  def edit
-  end
-
   # POST /cocktails
-  # POST /cocktails.json
   def create
     @cocktail = Cocktail.new(cocktail_params)
-
-    respond_to do |format|
-      if @cocktail.save
-        format.html { redirect_to @cocktail, notice: 'Cocktail was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @cocktail.save
+      redirect_to cocktail_path(@cocktail)
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /cocktails/1
-  # PATCH/PUT /cocktails/1.json
-  def update
-    respond_to do |format|
-      if @cocktail.update(cocktail_params)
-        format.html { redirect_to @cocktail, notice: 'Cocktail was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
-    end
-  end
-
-  # DELETE /cocktails/1
-  # DELETE /cocktails/1.json
   def destroy
-    @cocktail.destroy
-    respond_to do |format|
-      format.html { redirect_to cocktails_url, notice: 'Cocktail was successfully destroyed.' }
-    end
+    cocktail = Cocktail.find(params[:id])
+    cocktail.destroy
+    redirect_to cocktails_path
   end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cocktail
-      @cocktail = Cocktail.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def cocktail_params
-      params.require(:cocktail).permit(:name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def cocktail_params
+    params.require(:cocktail).permit(:name, :picture)
+  end
 end
