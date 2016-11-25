@@ -1,3 +1,4 @@
+<div class="container">
 <h1>Criando uma dose para <%= @cocktail.name %></h1>
 
 <%= simple_form_for([@cocktail, @dose]) do |f| %>
@@ -5,4 +6,4 @@
   <%= f.input :ingredient_id, collection: @ingredients %>
   <%= f.button :submit, class: "btn btn-primary"  %>
 <% end %>
-
+</div>
